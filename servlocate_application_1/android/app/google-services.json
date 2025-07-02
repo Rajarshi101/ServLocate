@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "210151196614",
+    "project_id": "servlocate-firebase-1",
+    "storage_bucket": "servlocate-firebase-1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210151196614:android:2a5b14a9d2d876e14694c7",
+        "android_client_info": {
+          "package_name": "com.example.servlocate_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACAf6gbO8ohZJFiepFl8K5QMQqQkJb42g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210151196614:android:0f0424cf3e30ada94694c7",
+        "android_client_info": {
+          "package_name": "com.servlocate.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACAf6gbO8ohZJFiepFl8K5QMQqQkJb42g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
