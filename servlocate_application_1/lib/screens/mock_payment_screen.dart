@@ -20,7 +20,7 @@ class _MockPaymentScreenState extends State<MockPaymentScreen> {
       'paymentTimestamp': DateTime.now().toIso8601String(),
     });
 
-    if (!mounted) return; // ✅ Prevent using context if widget is disposed
+    if (!mounted) return; // Prevent using context if widget is disposed
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Payment Successful')),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
-import 'screens/splash_screen.dart'; // 👈 splash will go to login
+import 'screens/splash_screen.dart'; // splash will go to login
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class ServLocateApp extends StatelessWidget {
       title: 'ServLocate',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const SplashScreen(), // 👈 This should go to login, then to main app
+      home: const SplashScreen(), // This should go to login, then to main app
     );
   }
 }
