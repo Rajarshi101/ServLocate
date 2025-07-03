@@ -1,10 +1,9 @@
-📱 ServLocate App – Full Documentation# ServLocate
+# 📱 ServLocate App – Full Documentation
 
-Overview
+## Overview
 ServLocate is an on-demand services platform built using Flutter and Firebase, integrated with CometChat UIKit for real-time messaging. It enables users to post, explore, book, and manage service requests across various categories like teaching, healthcare, cleaning, tech support, and more. Both clients and service providers operate from a single account, switching roles dynamically.
 
-📌 Features
-✅ Core Functionalities
+## ✅ Core Functionalities
 User Login via UID (CometChat)
 Service Posting with optional image upload
 Service Browsing & Filtering by category
@@ -13,7 +12,7 @@ Service Provider Dashboard to accept/reject bookings
 Booking History View for clients
 Real-time Chat using CometChat UIKit
 
-🔧 Tech Stack
+## 🔧 Tech Stack
 | Layer            | Technology                          |
 | ---------------- | ----------------------------------- |
 | Frontend         | Flutter (Dart)                      |
@@ -23,7 +22,7 @@ Real-time Chat using CometChat UIKit
 | Image Handling   | image\_picker + Firebase Storage    |
 | Authentication   | UID-based (via CometChat login)     |
 
-📁 Project Structure
+## 📁 Project Structure
 lib/
 ├── main.dart
 ├── models/
@@ -43,7 +42,7 @@ lib/
 │   ├── splash_screen.dart
 │   └── main_navigation_screen.dart
 
-🧩 Dependencies
+## 🧩 Dependencies
 Add these to your pubspec.yaml:
 dependencies:
   flutter:
@@ -56,7 +55,7 @@ dependencies:
   uuid: ^3.x.x
   cometchat_chat_uikit: ^4.x.x
 
-🚀 Setup Instructions
+## 🚀 Setup Instructions
 1. Flutter Setup:
 flutter pub get
 2. Firebase Setup:
@@ -75,7 +74,7 @@ flutter run
 6. Build APK for Release:
 flutter build apk --release
 
-📲 User Flow
+## 📲 User Flow
 Login
 Users enter their UID to login (via CometChat).
 On success, redirected to MainNavigationScreen.
@@ -95,7 +94,7 @@ Once a booking is accepted:
 A new CometChat conversation becomes available.
 Both provider and client can communicate via InboxScreen.
 
-🧪 Testing Checklist
+## 🧪 Testing Checklist
 | Feature                            | Tested |
 | ---------------------------------- | ------ |
 | UID Login                          | ✅      |
@@ -108,7 +107,7 @@ Both provider and client can communicate via InboxScreen.
 | Message Notification on Acceptance | ✅      |
 | Mock Payment Screen                | ⚠️     |
 
-💬 Notes
+## 💬 Notes
 Image Upload Optional: Posting works even if no image is uploaded.
 Mock Payment: mock_payment_screen.dart is not integrated. Can be removed or enhanced for Razorpay/Stripe.
 CometChat UID Login: No Firebase Auth used—login is based on CometChat UID.
@@ -116,14 +115,14 @@ Firestore Collections:
 services
 bookings
 
-📌 Future Enhancements
+## 📌 Future Enhancements
 Integrate real payment gateway
 Add notifications (Firebase Cloud Messaging)
 Provider profile management
 Rating/review system for services
 Analytics dashboard for service usage
 
-📷 Screenshots (Optional)
+## 📷 Screenshots (Optional)
 Add screenshots of key flows like:
 Login
 Post Service
