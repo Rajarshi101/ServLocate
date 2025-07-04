@@ -1,7 +1,7 @@
 # 📱 ServLocate App – Full Documentation
 
 ## Overview
-ServLocate is an on-demand services platform built using Flutter and Firebase, integrated with CometChat UIKit for real-time messaging. It enables users to post, explore, book, and manage service requests across various categories like teaching, healthcare, cleaning, tech support, and more. Both clients and service providers operate from a single account, switching roles dynamically.
+ServLocate is an on-demand services platform built using Flutter and Firebase, integrated with CometChat UIKit for real-time messaging. It enables users to post, explore, book, and manage service requests across various categories like teaching, healthcare, cleaning, tech support, and more. Both clients and service providers operate from a single account, switching roles dynamically. It is ideal for Freelancers to post their services and the user friendly dashboard makes it easy for clients to discover and avail required services.
 
 ---
 ## ✅ Core Functionalities
@@ -22,7 +22,7 @@ ServLocate is an on-demand services platform built using Flutter and Firebase, i
 | State Management | Stateful Widgets                    |
 | Backend          | Firebase (Firestore, Storage, Auth) |
 | Realtime Chat    | CometChat UIKit                     |
-| Image Handling   | image\_picker + Firebase Storage    |
+| Image Handling   | image\_picker + Firebase Storage **[NOT YET INTEGRATED]**   |
 | Authentication   | UID-based (via CometChat login)     |
 
 ---
@@ -30,6 +30,7 @@ ServLocate is an on-demand services platform built using Flutter and Firebase, i
 ```
 lib/
 ├── main.dart
+├── firebase_options.dart
 ├── models/
 │   └── service_model.dart
 ├── screens/
@@ -41,11 +42,12 @@ lib/
 │   │   ├── post_service_screen.dart
 │   │   ├── service_explorer_screen.dart
 │   │   └── service_details_screen.dart
-│   ├── auth/
-│   │   └── login_screen.dart
+│   ├── login_screen.dart
+│   ├── profile_screen.dart
 │   ├── inbox_screen.dart
 │   ├── splash_screen.dart
-│   └── main_navigation_screen.dart
+│   ├── main_navigation_screen.dart
+│   └── mock_payment_screen.dart [NOT YET INTEGRATED]
 ```
 
 ---
@@ -130,7 +132,7 @@ dependencies:
 | View Bookings (Client)             | ✅      |
 | Accept/Reject Bookings (Provider)  | ✅      |
 | Chat Interface Opens               | ✅      |
-| Message Notification on Acceptance | ✅      |
+| Message Notification on Acceptance | ⚠️      |
 | Mock Payment Screen                | ⚠️     |
 
 ---
@@ -147,6 +149,7 @@ dependencies:
 * Integrate real payment gateway
 * Add notifications (Firebase Cloud Messaging)
 * Provider profile management
+* Scheduling Booking Date & Time (Integrating Google Calendar)
 * Rating/review system for services
 * Analytics dashboard for service usage
 
