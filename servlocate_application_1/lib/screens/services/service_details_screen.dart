@@ -16,6 +16,7 @@ class ServiceDetailsScreen extends StatelessWidget {
       'providerId': service.postedBy,
       'status': 'pending',
       'timestamp': DateTime.now().toIso8601String(),
+      'paid': false,
     });
 
     if (!context.mounted) return;
@@ -25,10 +26,22 @@ class ServiceDetailsScreen extends StatelessWidget {
   }
 
   void _startChat(BuildContext context) {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => const CometChatConversationsWithMessages(),
+    //   ),
+    // );
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => const CometChatConversationsWithMessages(),
+        builder: (_) => WillPopScope(
+          onWillPop: () async {
+            Navigator.pop(context);
+            return false;
+          },
+          child: const CometChatConversationsWithMessages(),
+        ),
       ),
     );
   }

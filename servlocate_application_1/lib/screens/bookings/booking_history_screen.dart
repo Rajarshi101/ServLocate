@@ -1,81 +1,82 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../mock_payment_screen.dart';
+import 'package:cometchat_chat_uikit/cometchat_chat_uikit.dart';
 
 class BookingHistoryScreen extends StatelessWidget {
   final String currentUid;
 
   const BookingHistoryScreen({super.key, required this.currentUid});
 
-  Stream<List<Map<String, dynamic>>> _getBookings() async* {
-    final bookingsStream = FirebaseFirestore.instance
-        .collection('bookings')
-        .where('clientId', isEqualTo: currentUid)
-        .snapshots();
+  void _markAsCompleted(BuildContext context, String bookingId) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => MockPaymentScreen(bookingId: bookingId),
+      ),
+    );
+  }
 
-    await for (final snapshot in bookingsStream) {
-      List<Map<String, dynamic>> bookings = [];
-
-      for (final bookingDoc in snapshot.docs) {
-        final bookingData = bookingDoc.data();
-        final serviceId = bookingData['serviceId'];
-
-        if (serviceId != null) {
-          final serviceSnapshot = await FirebaseFirestore.instance
-              .collection('services')
-              .doc(serviceId)
-              .get();
-
-          if (serviceSnapshot.exists) {
-            final serviceData = serviceSnapshot.data();
-            if (serviceData != null) {
-              bookings.add({
-                'bookingId': bookingDoc.id,
-                'status': bookingData['status'],
-                'timestamp': bookingData['timestamp'],
-                'service': serviceData,
-              });
-            }
-          }
-        }
-      }
-
-      yield bookings;
-    }
+  void _startChat(BuildContext context, String providerId) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        // builder: (_) => CometChatMessages(
+        //   user: User(uid: providerId, name: "Provider"),
+        // ),
+        builder: (_) => WillPopScope(
+            onWillPop: () async {
+              Navigator.pop(context); // Prevent screen blackout
+              return false;
+            },
+            child: CometChatMessages(
+              user: User(uid: providerId, name: "Provider"),
+            ),
+          ),
+      
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('My Bookings')),
-      body: StreamBuilder<List<Map<String, dynamic>>>(
-        stream: _getBookings(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection('bookings')
+            .where('clientId', isEqualTo: currentUid)
+            .snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
+          if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+          final bookings = snapshot.data!.docs;
 
-          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No bookings found.'));
-          }
-
-          final bookings = snapshot.data!;
+          if (bookings.isEmpty) return const Center(child: Text('No bookings found.'));
 
           return ListView.builder(
             itemCount: bookings.length,
             itemBuilder: (context, index) {
               final booking = bookings[index];
-              final service = booking['service'];
+              final status = booking['status'];
+              final paid = booking['paid'] ?? false;
 
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                margin: const EdgeInsets.all(8),
                 child: ListTile(
-                  title: Text(service['title'] ?? 'Unknown Service'),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  title: Text('Service ID: ${booking['serviceId']}'),
+                  subtitle: Text('Status: $status\nPaid: ${paid ? "Yes" : "No"}'),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Category: ${service['category']}'),
-                      Text('Status: ${booking['status']}'),
-                      Text('Date: ${booking['timestamp'].toString().split('T').first}'),
+                      if (status == 'accepted' && !paid)
+                        IconButton(
+                          icon: const Icon(Icons.payment),
+                          onPressed: () => _markAsCompleted(context, booking.id),
+                        ),
+                      IconButton(
+                        icon: const Icon(Icons.chat),
+                        onPressed: () => _startChat(context, booking['providerId']),
+                      ),
                     ],
                   ),
                 ),

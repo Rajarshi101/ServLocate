@@ -10,6 +10,7 @@ class ProviderBookingRequestsScreen extends StatelessWidget {
   void _updateBookingStatus(String bookingId, String status) {
     FirebaseFirestore.instance.collection('bookings').doc(bookingId).update({
       'status': status,
+      'paid': false, // Ensure it's still marked unpaid when accepted
     });
   }
 

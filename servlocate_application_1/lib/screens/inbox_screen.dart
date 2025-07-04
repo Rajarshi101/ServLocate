@@ -5,11 +5,21 @@ class InboxScreen extends StatelessWidget {
   final String currentUid;
   const InboxScreen({super.key, required this.currentUid});
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(title: const Text('Inbox')),
+  //     body: const CometChatConversationsWithMessages(),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Inbox')),
-      body: const CometChatConversationsWithMessages(),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context);
+        return false;
+      },
+      child: const CometChatConversationsWithMessages(),
     );
   }
 }
