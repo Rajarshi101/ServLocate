@@ -267,9 +267,9 @@ dependencies:
 * Analytics dashboard for service usage
 
 ---
-## 📷 Screenshots (Optional)
-> Add screenshots of key flows like:
->* Login
+## 📷 Screenshots
+> Screenshots of key flows:
+* Login
 >* Post Service
 >* Book Service
 >* Booking Requests
