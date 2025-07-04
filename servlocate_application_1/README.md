@@ -15,6 +15,55 @@ ServLocate is an on-demand services platform built using Flutter and Firebase, i
 * ***Mock Payment Screen*** (placeholder for real payment gateway)
 
 ---
+## ⚙️ Features
+### ✅ User Roles
+* A single user can both post services as a provider and book services as a client.
+* Role-based behavior is determined dynamically at runtime depending on user action.
+
+### 🔐 Authentication
+* Simple UID-based login via CometChat.
+* No separate Firebase Authentication screen.
+* Secure CometChat login is triggered using the UID.
+
+### 🧑‍💼 Service Posting
+* Users can post services with:
+    * Title, description, category, location, price
+    * Optional image (uploaded to Firebase Storage)
+* All service listings are stored in Cloud Firestore.
+
+### 🔍 Service Explorer
+* Users can browse all available services.
+* Category-based filtering supported.
+* Clicking a service opens a detailed view.
+* Bookings are stored with status: `pending`, `accepted`, `rejected`, `completed`
+
+### 💼 Booking Workflow
+#### For Clients:
+* View your active, pending, and completed bookings
+* Once accepted, chat with the provider
+* After service completion, click ***"Mark as Completed"***
+* Redirected to ***Mock Payment Portal***
+* On successful payment:
+    * Booking marked as `paid: true` and `status: completed`
+    * Provider view is updated
+#### For Providers:
+* View incoming booking requests (`status: pending`)
+* Accept or reject requests
+* Accepted bookings shown separately
+* Once paid and completed, they are removed from active view
+
+### 💳 Mock Payment Screen
+* Clients input card details (simulated) and press "Pay Now".
+* The booking document’s paid field is set to true upon payment.
+* This moves the booking from “Active” to “Completed” status.
+
+### 💬 Real-Time Chat via CometChat
+* Uses CometChatUIKit.
+* Inbox page shows chat list.
+* Direct Message opens with provider after booking is accepted.
+* DM automatically initiated after booking acceptance.
+
+---
 ## 🔧 Tech Stack
 | Layer            | Technology                          |
 | ---------------- | ----------------------------------- |
@@ -67,6 +116,14 @@ dependencies:
   google_fonts: ^6.2.1
   cloud_firestore: ^4.15.0
 ```
+
+---
+## 📱 Supported Platforms
+| Platform | Supported              |
+| -------- | ---------------------- |
+| Android  | ✅ Fully tested        |
+| iOS      | ⚠️ Needs configuration |
+>This app uses CometChat UIKit and Firebase which are both iOS compatible, but iOS build and testing has not been done yet.
 
 ---
 ## 🚀 Setup Instructions
