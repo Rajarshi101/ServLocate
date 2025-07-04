@@ -175,9 +175,9 @@ dependencies:
     flutter run
     ```
 6. Build APK for Release:
-  ```
-  flutter build apk --release
-  ```
+     ```
+     flutter build apk --release
+     ```
 
 ---
 ## 📲 User Flow
