@@ -257,6 +257,12 @@ dependencies:
 * **Stay Logged-in:** This feature is not available yet. Every time the app is restarted, Login Credentials are required.
 
 ---
+## ⚠️ Challenges Faced
+1. Integrating the CometChat UI Kit with my Flutter App was easy but in the beginning the UI Kit was overriding my whole app, but I managed to integrate it properly using proper function calls at appropriate places to use the chat interface.
+
+2. There is still a bug related to the Chat UI I am facing, which I am unable to resolve. As you can see in my app, the UI's default return icon in the Inbox Page clashes with the normal navigation flow of the app, and ultimately the app screen blacks out.
+
+---
 ## 📌 Future Enhancements
 * Add a sign-up option in login page for new users
 * Integrate real payment gateway
