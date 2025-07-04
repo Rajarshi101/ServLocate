@@ -16,7 +16,7 @@ ServLocate is an on-demand services platform built using Flutter and Firebase, i
 
 ---
 ## ⚙️ Features
-### ✅ User Roles
+### 👤 User Roles
 * A single user can both post services as a provider and book services as a client.
 * Role-based behavior is determined dynamically at runtime depending on user action.
 
@@ -25,7 +25,16 @@ ServLocate is an on-demand services platform built using Flutter and Firebase, i
 * No separate Firebase Authentication screen.
 * Secure CometChat login is triggered using the UID.
 
-### 🧑‍💼 Service Posting
+### 🧭 Main Navigation Tabs
+| Tab         | Description                                  |
+| ----------- | -------------------------------------------- |
+| Explore     | View and book available services             |
+| My Bookings | Track client's bookings and complete them    |
+| Post        | Add a new service with optional image upload |
+| Inbox       | View & chat with matched providers/clients   |
+| Profile     | View UID and logout option                   |
+
+### 📄 Service Posting
 * Users can post services with:
     * Title, description, category, location, price
     * Optional image (uploaded to Firebase Storage)
@@ -118,6 +127,23 @@ dependencies:
 ```
 
 ---
+## 🌳 Development Environment
+* ***Flutter SDK***: 3.x+
+* ***Dart SDK***: Compatible with null safety
+* ***Firebase***: Firestore & Storage
+* ***CometChat***: Flutter Chat UIKit
+* ***IDE***: VSCode & Android Studio
+* ***Testing Device***: Google Pixel 2 emulator + physical Android phones
+
+---
+## 🔥 Firebase Setup
+* Authentication: No Firebase Auth used. Login handled via CometChat UID.
+* Firestore Collections:
+   * `services`: Posted service listings
+   * `bookings`: Tracks service booking between client and provider
+* Firebase Storage: Stores optional service images
+
+---
 ## 📱 Supported Platforms
 | Platform | Supported              |
 | -------- | ---------------------- |
@@ -157,7 +183,7 @@ dependencies:
 ## 📲 User Flow
 **Login**
 * Users enter their UID to login (via CometChat).
-* On success, redirected to `MainNavigationScreen`.
+* On successful login, users are redirected to `MainNavigationScreen`.
   
 **Post a Service**
 * Providers fill a form: title, description, price, location, category.
@@ -166,17 +192,47 @@ dependencies:
   
 **Browse & Book Services**
 * Users can browse services in the `ServiceExplorerScreen`.
-* Book a service: creates a booking request with status `pending`.
+* Filtering by category is available.
+* Clicking “Book Now” sends a booking request with:
+   * `status: "pending"`
+   * `paid: false` (default)
+* Booking data is added to the `bookings` Firestore collection.
   
-**Booking Management**
+**Booking Requests (Provider Side)**
 * Providers view incoming requests (`provider_booking_requests_screen.dart`).
-* They can accept/reject requests.
+* Each request has options to:
+   * ✅ Accept → Sets `status: "accepted"` and `paid: false`
+   * ❌ Reject → Sets `status: "rejected"`
 * Accepted bookings appear in a separate section.
-  
-**Chat**
-* Once a booking is accepted:
-    * A new CometChat conversation becomes available.
-    * Both provider and client can communicate via `InboxScreen`.
+
+**Accepted Bookings (Provider Side)**
+* All active bookings accepted by the provider are shown here(`provider_accepted_bookings_screen.dart`).
+* The provider can:
+   * View booking details.
+   * Open chat with the respective client.
+   * Automatically see bookings disappear once marked `paid`.
+
+**Booking History (Client Side)**
+* Clients see their booking requests on `BookingHistoryScreen`.
+* Bookings marked as `accepted` and `paid: false` can be:
+   * Marked as “Completed” by the client.
+   * This redirects them to `MockPaymentScreen`.
+
+**Mock Payment Flow**
+* Client clicks "Mark as Complete".
+* Redirected to a mock payment page (`MockPaymentScreen`).
+* On successful payment:
+   * Booking's `paid` status is updated to `true`.
+   * It is removed from active lists.
+   * Provider can now consider the service completed.
+
+**Chat Integration (Real-Time)**
+* Powered by CometChat UIKit.
+* Triggered only when a booking is accepted.
+* Both provider and client can:
+   * Access chat via Inbox (`InboxScreen`) or via specific booking.
+   * Directly open a DM with the other party.
+* Back navigation from chat is now safe and functional.
 
 ---
 ## 🧪 Testing Checklist
@@ -195,16 +251,16 @@ dependencies:
 ---
 ## 💬 Notes
 * **Image Upload Optional:** Posting works even if no image is uploaded.
-* **Mock Payment:** `mock_payment_screen.dart` is not integrated. Can be removed or enhanced for Razorpay/Stripe.
+* **Mock Payment:** `mock_payment_screen.dart` can be replaced or enhanced for Razorpay/Stripe.
 * **CometChat UID Login:** No Firebase Auth used—login is based on CometChat UID.
-* **Firestore Collections:**
-    * `services`
-    * `bookings`
+* **Return Icon Bug from Inbox:** In the `InboxScreen` there is a return icon on the top left corner from the CometChat UI Kit. Clicking it causes the device screen to blackout and the app to stop working, needing to restart the app.
+* **Stay Logged-in:** This feature is not available yet. Every time the app is restarted, Login Credentials are required.
 
 ---
 ## 📌 Future Enhancements
+* Add a sign-up option in login page for new users
 * Integrate real payment gateway
-* Add notifications (Firebase Cloud Messaging)
+* Add status update and message notifications
 * Provider profile management
 * Scheduling Booking Date & Time (Integrating Google Calendar)
 * Rating/review system for services
