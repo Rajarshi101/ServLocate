@@ -269,9 +269,42 @@ dependencies:
 ---
 ## 📷 Screenshots
 > Screenshots of key flows:
-* Login
->* Post Service
->* Book Service
->* Booking Requests
->* Chat Inbox
->* Chat Interface
+* Splash Screen / Welcome Screen
+  
+  <img src="../media/SplashScreen.jpg" alt="Splash Screen" width="200" />
+* Login Screen:
+  
+  <img src="../media/LoginScreen.jpg" alt="Splash Screen" width="200" />
+* Home Screen / Explore Services Screen:
+
+  <img src="../media/HomeScreen.jpg" alt="Splash Screen" width="200" />
+* Service Details (Click on each service to view details in Home Screen):
+
+  <img src="../media/ServiceDetails1.jpg" alt="Splash Screen" width="200" />
+  <img src="../media/ServiceDetails2.jpg" alt="Splash Screen" width="200" />
+* User Profile Screen:
+
+  <img src="../media/UserProfileScreen.jpg" alt="Splash Screen" width="200" />
+* Post Service Screen (For Providers):
+
+  <img src="../media/PostServiceScreen.jpg" alt="Splash Screen" width="200" />
+* Pending Booking Request Screen (For Providers):
+
+  <img src="../media/BookingRequestScreen(ProviderSide).jpg" alt="Splash Screen" width="200" />
+* Active Accepted Bookings Screen (For Providers):
+
+  <img src="../media/AcceptedBookingsScreen(ProviderSide).jpg" alt="Splash Screen" width="200" />
+* Booking History Screen (For Clients):
+
+  <img src="../media/BookingHistoryScreen(ClientSide).jpg" alt="Splash Screen" width="200" />
+* Payment Portal (For Clients):
+
+  <img src="../media/PaymentPortal(Mock-Simulated).jpg" alt="Splash Screen" width="200" />
+* Chat Inbox (CometChat UI):
+
+  <img src="../media/Inbox1.jpg" alt="Splash Screen" width="200" />
+  <img src="../media/Inbox2.jpg" alt="Splash Screen" width="200" />
+* Chat Interface (CometChat UI):
+
+  <img src="../media/DM1.jpg" alt="Splash Screen" width="200" />
+  <img src="../media/DM2.jpg" alt="Splash Screen" width="200" />
